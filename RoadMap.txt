@@ -1,0 +1,16 @@
+V1.0: 
+- save and load from generation folder
+
+V1.1
+- create unit test to check the play is without bugs or inconsistencies
+
+V2.0
+- dev database for hand value
+
+V2.1
+- use algo G for intitialization
+
+V2.2
+- use lstm for player decision
+- multi threading for algo G
+ 

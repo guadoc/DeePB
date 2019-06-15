@@ -1,0 +1,18 @@
+
+
+- optim sur calcul de valeur de main
+		- table de hash
+		- garder en mémoire le calcul (ex: du board)
+
+  
+- check memory leak in graphic version
+
+- dissociate log table/player from graphic/trainable
+		- study diamond inheritance
+		- generic inheritance
+		
+- Refactors:
+		- Use struct for Cards
+ 
+
+ 

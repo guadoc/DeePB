@@ -1,0 +1,38 @@
+
+
+#ifndef TABLE_LIB_TABLEGUI_H_
+#define TABLE_LIB_TABLEGUI_H_
+
+
+
+//#pragma once
+#include "../StdAfx.h"
+#include "../deck_lib/Deck.h"
+#include "../deck_lib/Card.h"
+#include "../deck_lib/Hand.h"
+#include "../player_lib/PlayerRandom.h"
+#include "../player_lib/PlayerGUI.h"
+#include "AbstractTable.h"
+#include "../utils/utils.h"
+#include "GUI.h"
+
+using namespace std;
+
+class TableGUI : public AbstractTable{
+public:
+	TableGUI();
+	TableGUI(unsigned int n_players);
+	TableGUI(vector<AbstractPlayer*> &);
+	~TableGUI(void);
+
+	void display_table(unsigned int);
+	GUI * get_gui() const;
+
+
+protected:
+	GUI *gui;
+};
+
+
+
+#endif /* TABLE_LIB_TABLEGUI_H_ */
