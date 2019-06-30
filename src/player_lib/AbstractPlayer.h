@@ -18,6 +18,7 @@ public:
 	AbstractPlayer(AbstractTable *, unsigned int position);
 	virtual ~AbstractPlayer();
 
+	void init_bank_roll();
 	void set_hand(const Hand &);
 	void set_hand(const list<Card> &);
 	void clear_hand(void);
@@ -58,7 +59,7 @@ public:
 		t_check
 	};
 
-	Action play_street(unsigned int);
+	virtual Action play_street(unsigned int);
 
 	virtual Action raise_pot(unsigned int);
 	virtual Action call_pot();

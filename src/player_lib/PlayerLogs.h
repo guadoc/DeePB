@@ -22,6 +22,8 @@ public:
 	PlayerLogs(AbstractTable * table, unsigned int);
 	~PlayerLogs();
 
+	Action play_street(unsigned int);
+
 	Action raise_pot(unsigned int);
 	Action call_pot();
 	Action bet_pot(unsigned int);

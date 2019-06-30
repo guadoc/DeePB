@@ -32,13 +32,8 @@ void TableLogs::display_table(unsigned int position_active_payer){
 	cout<<this->to_str()<<endl;
 }
 
-void TableLogs::distribute_preflop(){
-	ParentTableLogs::distribute_preflop();
-	this->display_table(-1);
-}
-
-void TableLogs::distribute_card_to_board(){
-	ParentTableLogs::distribute_card_to_board();
+void TableLogs::distribute_street(Street street){
+	ParentTableLogs::distribute_street(street);
 	this->display_table(-1);
 }
 
@@ -84,7 +79,7 @@ void TableLogs::player_gets_pot(AbstractPlayer* player, unsigned int pot){
 }
 
 
-bool TableLogs::run_full_street(AbstractTable::Street street, bool action){
+bool TableLogs::run_full_street(Street street, bool action){
 	if(street == AbstractTable::t_flop){
 		cout<<"***********************************FLOP*************************"<<endl;
 	}

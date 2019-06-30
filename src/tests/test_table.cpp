@@ -28,8 +28,11 @@ public:
 		float param[] = {1.};
 		float input[] = {0.5};
 
+
 		torch::Tensor tensor_param = torch::from_blob(param, {1}, torch::requires_grad());
 		torch::Tensor tensor_input = torch::from_blob(input, {1});
+
+		cout<<"Param "<<tensor_param <<endl;
 
 		vector<torch::Tensor> parameters;
 		parameters.push_back(tensor_param);
@@ -47,7 +50,6 @@ public:
 		auto val2 = torch::sigmoid(tensor_param + tensor_input);
 		val2.backward(torch::nullopt, /*keep_graph=*/ true, /*create_graph=*/ false);
 		cout<<"Grad 3 "<<tensor_param.grad()<<endl;
-
 		return 0;
 	}
 
@@ -55,12 +57,13 @@ public:
 
 	int test_session(){
 		vector<AbstractPlayer*> players;
-		players.push_back(new PlayerBotV1("PlayerBotV2_lr-0.1", 0.01));
-		players.push_back(new PlayerBotV1("PlayerBotV1_lr-0_1", 0.01));
-		players.push_back(new PlayerBotV1("PlayerBotV1_lr-0_2", 0.01));
-		players.push_back(new PlayerBotV1("PlayerBotV1_lr-0_3", 0.01));
-		players.push_back(new PlayerBotV1("PlayerBotV1_lr-0_4", 0.01));
-		players.push_back(new PlayerBotV1("PlayerBotV1_lr-0_5", 0.01));
+
+		players.push_back(new PlayerBotV2("PlayerBotV1_lr-0_1", 0.0));
+		players.push_back(new PlayerBotV2("PlayerBotV2_lr-0.1", 0.0001));
+		players.push_back(new PlayerBotV2("PlayerBotV1_lr-0_2", 0.0));
+		players.push_back(new PlayerBotV2("PlayerBotV1_lr-0_3", 0.0));
+		players.push_back(new PlayerBotV2("PlayerBotV1_lr-0_4", 0.0));
+		players.push_back(new PlayerBotV2("PlayerBotV1_lr-0_5", 0.0));
 
 		Session sess = Session(players);
 		unsigned int n_hands = 100000;
@@ -101,8 +104,6 @@ public:
 		TableGUI* table = new TableGUI(players);
 		unsigned int n_hands = 1000;
 		for (unsigned int i =1; i<= n_hands; i++){
-			cout<<"####################################################################"<<endl;
-			cout<<"############################ NEW HAND ##############################"<<endl;
 			table->play_hand();
 		}
 		return 0;
@@ -122,8 +123,6 @@ public:
 		cout<<"Go play"<<endl;
 		unsigned int n_hands = 10;
 		for (unsigned int i =1; i<= n_hands; i++){
-			cout<<"####################################################################"<<endl;
-			cout<<"############################ NEW HAND ##############################"<<endl;
 			table->play_hand();
 		}
 		return 0;

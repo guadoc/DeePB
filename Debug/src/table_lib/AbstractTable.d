@@ -10,6 +10,7 @@ src/table_lib/AbstractTable.o: ../src/table_lib/AbstractTable.cpp \
  ../src/table_lib/../player_lib/StatPlayer.h \
  ../src/table_lib/../player_lib/../utils/utils.h \
  ../src/table_lib/../player_lib/../utils/../StdAfx.h \
+ ../src/table_lib/../player_lib/PlayerLogs.h \
  ../src/table_lib/../utils/utils.h
 
 ../src/table_lib/AbstractTable.h:
@@ -37,5 +38,7 @@ src/table_lib/AbstractTable.o: ../src/table_lib/AbstractTable.cpp \
 ../src/table_lib/../player_lib/../utils/utils.h:
 
 ../src/table_lib/../player_lib/../utils/../StdAfx.h:
+
+../src/table_lib/../player_lib/PlayerLogs.h:
 
 ../src/table_lib/../utils/utils.h:

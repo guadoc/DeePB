@@ -12,13 +12,15 @@
 #include "../deck_lib/Hand.h"
 #include "../player_lib/PlayerRandom.h"
 #include "../player_lib/PlayerGUI.h"
-#include "AbstractTable.h"
+#include "TableLogs.h"
+//#include "AbstractTable.h"
 #include "../utils/utils.h"
 #include "GUI.h"
 
 using namespace std;
+using ParentTableGUI = TableLogs;
 
-class TableGUI : public AbstractTable{
+class TableGUI : public ParentTableGUI{
 public:
 	TableGUI();
 	TableGUI(unsigned int n_players);

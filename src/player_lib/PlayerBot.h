@@ -11,13 +11,13 @@
 #include "AbstractPlayer.h"
 #include "PlayerLogs.h"
 
-using ParentPlayerBot = PlayerLogs;
+using ParentPlayerBot = AbstractPlayer;
 
 class PlayerBot : public ParentPlayerBot{
 
 public:
 	PlayerBot(void);
-//	PlayerBot(string id, float);
+	PlayerBot(string id);
 	PlayerBot(AbstractTable * table);
 	PlayerBot(AbstractTable * table, unsigned int);
 	virtual ~PlayerBot();

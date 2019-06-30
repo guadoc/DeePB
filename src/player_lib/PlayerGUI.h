@@ -10,9 +10,12 @@
 
 //#include "../StdAfx.h"
 #include "AbstractPlayer.h"
+#include "PlayerLogs.h"
 #include "../utils/utils.h"
 
-class PlayerGUI : public AbstractPlayer{
+using ParentPlayerGUI = PlayerLogs;
+
+class PlayerGUI : public ParentPlayerGUI{
 public:
 	Action play_preflop();
 	Action play_flop();

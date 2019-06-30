@@ -9,6 +9,7 @@
 #define TABLE_LIB_SESSION_H_
 
 #include "../table_lib/TableTrain.h"
+#include "../player_lib/PlayerBot.h"
 
 class Session {
 public:

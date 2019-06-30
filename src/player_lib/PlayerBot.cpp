@@ -17,9 +17,14 @@ PlayerBot::PlayerBot(AbstractTable * table):ParentPlayerBot(table){
 	this->loss = 0;
 }
 
+PlayerBot::PlayerBot(string id):ParentPlayerBot(id){
+	this->loss = 0;
+}
+
 PlayerBot::PlayerBot(AbstractTable * table, unsigned int position):ParentPlayerBot(table, position){
 	this->loss = 0;
 }
+
 PlayerBot::~PlayerBot() {
 	// TODO Auto-generated destructor stub
 }
@@ -34,15 +39,7 @@ void PlayerBot::add_to_stake(unsigned int value){
 	ParentPlayerBot::add_to_stake(value);
 	this->loss += value;
 }
-//void PlayerBot::init_macro_params(){
-//
-//}
-//void PlayerBot::mute_macro_params(){
-//
-//}
-//void PlayerBot::init_learning_params(){
-//
-//}
+
 
 void PlayerBot::init_params(){
 	this->init_macro_params();

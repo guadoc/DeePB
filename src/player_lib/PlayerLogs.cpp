@@ -32,26 +32,29 @@ PlayerLogs::PlayerLogs(AbstractTable * table, unsigned int position):AbstractPla
 
 PlayerLogs::~PlayerLogs(void){}
 
-
+PlayerLogs::Action PlayerLogs::play_street(unsigned int street){
+	this->table->display_table(this->pos_on_table);
+	return AbstractPlayer::play_street(street);
+}
 
 PlayerLogs::Action PlayerLogs::raise_pot(unsigned int value){
-	cout<<"Player " + to_string(this->pos_on_table)+" RAISE "+ std::to_string(value)<<endl;
+	cout<<"==> Player " + to_string(this->pos_on_table)+" RAISE "+ std::to_string(value)<<"\n"<<endl;
 	return AbstractPlayer::raise_pot(value);
 }
 
 
 PlayerLogs::Action PlayerLogs::bet_pot(unsigned int value){
-	cout<<"player " + to_string(this->pos_on_table)+" BET " + std::to_string(value)<<endl;
+	cout<<"==> Player " + to_string(this->pos_on_table)+" BET " + std::to_string(value)<<"\n"<<endl;
 	return AbstractPlayer::bet_pot(value);
 }
 
 PlayerLogs::Action PlayerLogs::fold_pot(){
-	cout<<"player " + to_string(this->pos_on_table)+" FOLD"<<endl;
+	cout<<"==> Player " + to_string(this->pos_on_table)+" FOLD"<<"\n"<<endl;
 	return AbstractPlayer::fold_pot();
 }
 
 PlayerLogs::Action PlayerLogs::check_pot(){
-	cout<<"player " + to_string(this->pos_on_table)+" CHECK"<<endl;
+	cout<<"==> Player " + to_string(this->pos_on_table)+" CHECK"<<"\n"<<endl;
 	return AbstractPlayer::check_pot();
 }
 
@@ -59,6 +62,6 @@ PlayerLogs::Action PlayerLogs::check_pot(){
 PlayerLogs::Action PlayerLogs::call_pot(){
 	unsigned int value = (int)this->table->get_last_raise() - (int)this->commitment;
 	unsigned int value_commited = min(value, this->stake);
-	cout<<"player " + to_string(this->pos_on_table)+" CALL "<<value_commited<<endl;
+	cout<<"==> Player " + to_string(this->pos_on_table)+" CALL "<<value_commited<<"\n"<<endl;
 	return AbstractPlayer::call_pot();
 }

@@ -1,4 +1,5 @@
 #include "Hand.h"
+#include <cmath>
 
 Hand::Hand() {
 	this->is_evaluated = false;
@@ -123,8 +124,16 @@ bool is_in_list(unsigned int card_id, list<Card> card_list) {
 
 
 
-unsigned int Hanh_function(){
-	return 0;
+unsigned int Hand::h_function(){
+	unsigned int h_code = 0;
+	this->cards.sort();
+	this->cards.reverse(); //can be removed
+	unsigned int power = 0;
+	for (auto card :this->cards){
+		h_code += card.get_id() * std::pow((float)52, (int)power);
+		power++;
+	}
+	return h_code;
 }
 
 unsigned int Hand::combinatorial_average_value(unsigned int n_total_cards) {

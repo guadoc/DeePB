@@ -284,8 +284,6 @@ public:
 		Hand hand = Hand();
 		hand.push_back(deck.random_card());
 		hand.push_back(deck.random_card());
-
-
 		cout<<hand.monte_carlo_average_value(n_total_cards, n_mc_sample)<<endl;
 
 		return 0;
@@ -318,6 +316,22 @@ public:
 			cout<<iter_hand->to_str()<<" top "<<(1326 -i) * 100 /1326<<"%"<<endl;
 			i++;
 		}
+		return 0;
+	}
+
+
+	int test_hash_function(){
+		Deck deck = Deck();
+		Hand hand = Hand();
+		hand.push_back(deck.random_card());
+		hand.push_back(deck.random_card());
+		hand.push_back(deck.random_card());
+		hand.push_back(deck.random_card());
+		hand.push_back(deck.random_card());
+//		cout<<hand.to_str()<<endl;
+		cout<<"h code :"<<hand.h_function()<<endl;
+		cout<<hand.to_str()<<endl;
+
 		return 0;
 	}
 

@@ -47,32 +47,33 @@ public:
 			t_river
 		};
 
+
 	void distribute_card_to_board();
-	void distribute_street(AbstractTable::Street);
-	void distribute_preflop();
-	void distribute_flop();
-	void distribute_turn();
-	void distribute_river();
-
-
-	virtual void init_hand();
-	virtual void play_hand();
-	virtual void close_hand();
-
-	void run_pre_flop();
-	void run_street(AbstractTable::Street);
-	bool run_full_pre_flop();
-	bool run_full_street(AbstractTable::Street, bool);
+	virtual void distribute_street(AbstractTable::Street);
+	virtual void distribute_preflop();
+//	void distribute_flop();
+//	void distribute_turn();
+//	void distribute_river();
 
 	void update_current_raises(unsigned int);
 
+	void set_blends();
+	virtual void init_hand();
+	virtual void play_hand();
+
+	void run_pre_flop();
+	void run_street(AbstractTable::Street);
+	virtual bool run_full_pre_flop();
+	virtual bool run_full_street(AbstractTable::Street, bool);
 	bool gather_pots();
-	void player_gets_pot(AbstractPlayer* player, unsigned int pot);
-	void distribute_pot_to_best_hands();
 	void fill_side_pots(list<unsigned int> &);
-	void distribute_side_pot_to_best_hands(list<AbstractPlayer*> & players , unsigned int pot);
 
+	virtual void distribute_pot_to_best_hands();
+	virtual void distribute_side_pot_to_best_hands(list<AbstractPlayer*> & players , unsigned int pot);
+	virtual void distribute_side_pots_to_best_hands();
+	virtual void player_gets_pot(AbstractPlayer* player, unsigned int pot);
 
+	virtual void close_hand();
 
 
 protected:

@@ -4,13 +4,13 @@
 #include "../table_lib/AbstractTable.h"
 #include "../utils/utils.h"
 
+#define BASE_STAKE 100
+#define BANK_ROLL 100000
+
 using namespace std;
 
 AbstractPlayer::AbstractPlayer(void){
-	this->base_stake = 100;
-	this->auto_rebuy = true;
-	this->bank_roll = 100000 - this->base_stake;
-	this->stake  = this->base_stake;
+	this->init_bank_roll();
 	this->hand = Hand();
 	this->commitment = 0;
 	this->id = "AbstractPlayer";
@@ -31,6 +31,13 @@ AbstractPlayer::AbstractPlayer(AbstractTable *table):AbstractPlayer(){
 AbstractPlayer::AbstractPlayer(AbstractTable *table, unsigned int position):AbstractPlayer(table){
 	this->pos_on_table = position;
 	this->id = to_string(position); //TODO temporary
+}
+
+void AbstractPlayer::init_bank_roll(){
+	this->base_stake = BASE_STAKE;
+	this->bank_roll = BANK_ROLL - this->base_stake;
+	this->stake  = this->base_stake;
+	this->auto_rebuy = true;
 }
 
 

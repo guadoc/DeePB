@@ -46,7 +46,6 @@ vector<AbstractPlayer*> AbstractTable::get_players() const{
 
 
 void AbstractTable::display_table(unsigned int position_active_payer){
-	cout<<this->to_str()<<endl;
 }
 
 
@@ -116,27 +115,15 @@ void AbstractTable::distribute_card_to_board(){
 
 void AbstractTable::distribute_street(AbstractTable::Street street){
 	if(street == AbstractTable::t_flop){
-		this->distribute_flop();
+		this->distribute_card_to_board();
+		this->distribute_card_to_board();
+		this->distribute_card_to_board();
 	}
 	else {
-		this->distribute_turn();
+		this->distribute_card_to_board();
 	}
 }
 
-void AbstractTable::distribute_flop(){
-	this->distribute_card_to_board();
-	this->distribute_card_to_board();
-	this->distribute_card_to_board();
-}
-
-
-void AbstractTable::distribute_turn(){
-	this->distribute_card_to_board();
-}
-
-void AbstractTable::distribute_river(){
-	this->distribute_card_to_board();
-}
 
 
 void AbstractTable::init_hand(){
@@ -157,6 +144,11 @@ void AbstractTable::init_hand(){
 	this->side_pots_player_list.clear();
 
 	//The players pay the blends:
+	this->set_blends();
+}
+
+
+void AbstractTable::set_blends(){
 	this->players[(this->dealer + 1 ) % this->n_players]->commit_chips(this->small_blend);
 	this->before_last_raise = this->small_blend;
 	this->players[(this->dealer + 2 ) % this->n_players]->commit_chips(this->big_blend);
@@ -184,7 +176,6 @@ void AbstractTable::run_street(AbstractTable::Street street_number){
 				this->players[pos]->get_stake() > 0
 			)
 			{
-				this->display_table(pos);
 				AbstractPlayer::Action player_action = this->players[pos]->play_street(street_number);
 				if (
 					player_action == AbstractPlayer::Action::t_bet
@@ -214,7 +205,6 @@ void AbstractTable::run_pre_flop(){
 	bool called = false;
 	for (unsigned int i = 0; i < this->n_players - 1; i++){
 		pos = (pos_first_player + i)% this->n_players;
-		this->display_table(pos);
 		AbstractPlayer::Action player_action = this->players[pos]->play_street(street_number);
 		if (
 			player_action == AbstractPlayer::Action::t_bet
@@ -234,7 +224,6 @@ void AbstractTable::run_pre_flop(){
 			this->players[pos]->get_stake() > 0
 		)
 		{
-			this->display_table(pos);
 			AbstractPlayer::Action player_action = this->players[pos]->play_street(street_number);
 			if (
 				player_action == AbstractPlayer::Action::t_bet
@@ -260,7 +249,6 @@ void AbstractTable::run_pre_flop(){
 					this->players[pos]->get_stake() > 0
 				)
 				{
-					this->display_table(pos);
 					AbstractPlayer::Action player_action = this->players[pos]->play_street(street_number);
 					if (
 						player_action == AbstractPlayer::Action::t_bet
@@ -283,7 +271,6 @@ void AbstractTable::run_pre_flop(){
 
 void AbstractTable::player_gets_pot(AbstractPlayer* player, unsigned int pot){
 	player->add_to_stake(pot);
-	cout<<"Sit "<<player->get_pos_on_table()<<" gets "<<pot<<endl;
 }
 
 
@@ -403,54 +390,27 @@ bool AbstractTable::gather_pots(){
 }
 
 
-
-//TODO use this
 bool AbstractTable::run_full_street(AbstractTable::Street street, bool action){
 	if(action){
-		if(street == AbstractTable::t_flop){
-			cout<<"***********************************FLOP*************************"<<endl;
-		}
-		else if(street == AbstractTable::t_turn){
-			cout<<"***********************************TURN*************************"<<endl;
-		}
-		else if(street == AbstractTable::t_river){
-			cout<<"***********************************RIVER************************"<<endl;
-		}
 		this->distribute_street(street);
-		cout<<this->to_str()<<endl;
-	//	this->display_table(-1);
 		this->run_street(street);
 		return this->gather_pots();
 	}
 	else if(this->side_pots.size() > 0){
-		if(street == AbstractTable::t_flop){
-			cout<<"***********************************FLOP*************************"<<endl;
-		}
-		else if(street == AbstractTable::t_turn){
-			cout<<"***********************************TURN*************************"<<endl;
-		}
-		else if(street == AbstractTable::t_river){
-			cout<<"***********************************RIVER************************"<<endl;
-		}
-		this->distribute_turn();
+		this->distribute_street(street);
 	}
 	return false;
 }
 
 bool AbstractTable::run_full_pre_flop(void){
-	cout<<"***********************************PRE FLOP*************************"<<endl;
 	this->distribute_preflop();
-	cout<<this->to_str()<<endl;
 	this->run_pre_flop();
 	return this->gather_pots();
 }
 
 
 void AbstractTable::play_hand(){
-	cout<<"Hand N°"<<this->hand_played<<endl;
 	this->init_hand();
-	this->display_table(-1);
-
 	// PRE FLOP
 	bool continue_action = this->run_full_pre_flop();
 	// FLOP
@@ -460,24 +420,15 @@ void AbstractTable::play_hand(){
 	// RIVER
 	continue_action = this->run_full_street(AbstractTable::t_river, continue_action);
 
-	// End of the hand, distribution of the pot and side pots
-	cout<<this->to_str()<<endl;
-	this->display_table(-1);
-
-	if (continue_action and this->pot >0){
-		cout<<"Pot to best hand"<<endl;
+	if (continue_action and this->pot >0){ //TODO check if it is "or"
 		this->distribute_pot_to_best_hands();
 	}
 	if(this->side_pots.size()){
-		cout<<"Side pots to best hand"<<endl;
-		auto side_pot_players = this->side_pots_player_list.begin();
-		for(auto pot = this->side_pots.begin(); pot != this->side_pots.end(); pot++){
-			this->distribute_side_pot_to_best_hands(*side_pot_players, *pot);
-			side_pot_players ++ ;
-		}
+		this->distribute_side_pots_to_best_hands();
 	}
 	this->close_hand();
 }
+
 
 void AbstractTable::distribute_pot_to_best_hands(){
 	list<unsigned int> positions_max;
@@ -499,6 +450,14 @@ void AbstractTable::distribute_pot_to_best_hands(){
 	unsigned int winning_value = (unsigned int) this->pot / positions_max.size();
 	for(auto j = positions_max.begin(); j != positions_max.end(); j++){
 		this->player_gets_pot(this->players[*j], winning_value);
+	}
+}
+
+void AbstractTable::distribute_side_pots_to_best_hands(){
+	auto side_pot_players = this->side_pots_player_list.begin();
+	for(auto pot = this->side_pots.begin(); pot != this->side_pots.end(); pot++){
+		this->distribute_side_pot_to_best_hands(*side_pot_players, *pot);
+		side_pot_players ++ ;
 	}
 }
 
@@ -529,11 +488,10 @@ void AbstractTable::distribute_side_pot_to_best_hands(list<AbstractPlayer*>& pla
 
 
 
-void AbstractTable::close_hand(){
+void AbstractTable::close_hand(){	
 	for (unsigned int i = 0; i < this->n_players; i++){
 		this->players[i]->close_hand();
-	}
-	this->display_table(-1);
+	}	
 }
 
 
@@ -559,15 +517,13 @@ string AbstractTable::to_str() const {
 		str += + ", ";
 		player_list++;
 	}
-	str += "\n";
-
 
 	for (unsigned int i = 0; i < this->n_players; i++){
-		str += this->players[i]->to_str();
 		str += "\n";
+		str += this->players[i]->to_str();
 	}
+	//	str += "\n";
 
 	return str;
 }
 
-;

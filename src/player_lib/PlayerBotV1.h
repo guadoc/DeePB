@@ -31,9 +31,13 @@ public:
 
 
 protected:
-	float param;
+	float param_lead;
+	float param_foll;
 	float learning_rate;
 	float param_stat; //can be a vector
+	bool lead;
+
+	float relative_value;
 };
 
 #endif /* PLAYER_LIB_PLAYERBOTV1_H_ */

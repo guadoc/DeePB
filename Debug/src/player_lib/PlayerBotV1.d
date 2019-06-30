@@ -11,6 +11,7 @@ src/player_lib/PlayerBotV1.o: ../src/player_lib/PlayerBotV1.cpp \
  ../src/player_lib/../table_lib/../deck_lib/Hand.h \
  ../src/player_lib/../table_lib/../player_lib/PlayerRandom.h \
  ../src/player_lib/../table_lib/../player_lib/AbstractPlayer.h \
+ ../src/player_lib/../table_lib/../player_lib/PlayerLogs.h \
  ../src/player_lib/../table_lib/../utils/utils.h
 
 ../src/player_lib/PlayerBotV1.h:
@@ -46,5 +47,7 @@ src/player_lib/PlayerBotV1.o: ../src/player_lib/PlayerBotV1.cpp \
 ../src/player_lib/../table_lib/../player_lib/PlayerRandom.h:
 
 ../src/player_lib/../table_lib/../player_lib/AbstractPlayer.h:
+
+../src/player_lib/../table_lib/../player_lib/PlayerLogs.h:
 
 ../src/player_lib/../table_lib/../utils/utils.h:

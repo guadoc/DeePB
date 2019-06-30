@@ -5,8 +5,11 @@
 
 
 #include "AbstractPlayer.h"
+#include "PlayerLogs.h"
 
-class PlayerRandom : public AbstractPlayer {
+using ParentPlayerRandom = PlayerLogs;
+
+class PlayerRandom : public ParentPlayerRandom {
 public:
 	PlayerRandom(void);
 	PlayerRandom(string id);

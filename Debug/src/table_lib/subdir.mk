@@ -8,6 +8,7 @@ CPP_SRCS += \
 ../src/table_lib/GUI.cpp \
 ../src/table_lib/State.cpp \
 ../src/table_lib/TableGUI.cpp \
+../src/table_lib/TableLogs.cpp \
 ../src/table_lib/TableTrain.cpp \
 ../src/table_lib/Tracker.cpp 
 
@@ -16,6 +17,7 @@ OBJS += \
 ./src/table_lib/GUI.o \
 ./src/table_lib/State.o \
 ./src/table_lib/TableGUI.o \
+./src/table_lib/TableLogs.o \
 ./src/table_lib/TableTrain.o \
 ./src/table_lib/Tracker.o 
 
@@ -24,6 +26,7 @@ CPP_DEPS += \
 ./src/table_lib/GUI.d \
 ./src/table_lib/State.d \
 ./src/table_lib/TableGUI.d \
+./src/table_lib/TableLogs.d \
 ./src/table_lib/TableTrain.d \
 ./src/table_lib/Tracker.d 
 

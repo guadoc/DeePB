@@ -4,17 +4,17 @@
 
 #include "../table_lib/TableGUI.h"
 
-PlayerRandom::PlayerRandom(void):AbstractPlayer(){
+PlayerRandom::PlayerRandom(void):ParentPlayerRandom(){
 }
 
-PlayerRandom::PlayerRandom(string id):AbstractPlayer(id){
+PlayerRandom::PlayerRandom(string id):ParentPlayerRandom(id){
 }
 
-PlayerRandom::PlayerRandom(AbstractTable* table):AbstractPlayer(table){
+PlayerRandom::PlayerRandom(AbstractTable* table):ParentPlayerRandom(table){
 
 }
 
-PlayerRandom::PlayerRandom(AbstractTable * table, unsigned int position):AbstractPlayer(table, position){
+PlayerRandom::PlayerRandom(AbstractTable * table, unsigned int position):ParentPlayerRandom(table, position){
 }
 
 PlayerRandom::~PlayerRandom(void){}

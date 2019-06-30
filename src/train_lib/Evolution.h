@@ -21,9 +21,9 @@ public:
 	void run_party();
 	void selection(Session);
 	void run_thread(unsigned int);
-	bool select_genome(PlayerBot *);
+	bool select_genome(AbstractPlayer *);
 	void save_genome();
-	void mix_genome();
+//	void mix_genome();
 
 	void update_generation_folder();
 private:

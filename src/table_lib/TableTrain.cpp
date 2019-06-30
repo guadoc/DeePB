@@ -8,24 +8,21 @@
 #include "TableTrain.h"
 
 
-TableTrain::TableTrain(): AbstractTable(){
+TableTrain::TableTrain(): ParentTableTrain(){
 
 }
 
 
-TableTrain::TableTrain(unsigned int n_players):AbstractTable(n_players){
+TableTrain::TableTrain(unsigned int n_players):ParentTableTrain(n_players){
 }
 
-TableTrain::TableTrain(vector<AbstractPlayer*> & players):AbstractTable(players){
+TableTrain::TableTrain(vector<AbstractPlayer*> & players):ParentTableTrain(players){
 }
 
 TableTrain::~TableTrain(void){
 
 }
 
-void TableTrain::display_table(unsigned int pos){
-//do nothing
-}
 
 
 

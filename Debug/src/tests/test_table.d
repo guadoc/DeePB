@@ -15,6 +15,7 @@ src/tests/test_table.o: ../src/tests/test_table.cpp \
  ../src/tests/../player_lib/../table_lib/../deck_lib/Hand.h \
  ../src/tests/../player_lib/../table_lib/../player_lib/PlayerRandom.h \
  ../src/tests/../player_lib/../table_lib/../player_lib/AbstractPlayer.h \
+ ../src/tests/../player_lib/../table_lib/../player_lib/PlayerLogs.h \
  ../src/tests/../player_lib/../table_lib/../utils/utils.h \
  ../src/tests/../player_lib/PlayerBotV2.h \
  /home/walnutalgo/workspace/libtorch/include/torch/csrc/api/include/torch/torch.h \
@@ -238,16 +239,18 @@ src/tests/test_table.o: ../src/tests/test_table.cpp \
  ../src/tests/../train_lib/Session.h \
  ../src/tests/../train_lib/../table_lib/TableTrain.h \
  ../src/tests/../train_lib/../table_lib/AbstractTable.h \
+ ../src/tests/../train_lib/../table_lib/TableLogs.h \
  ../src/tests/../train_lib/../table_lib/Tracker.h \
  ../src/tests/../train_lib/../table_lib/State.h \
  ../src/tests/../train_lib/../table_lib/../StdAfx.h \
+ ../src/tests/../train_lib/../player_lib/PlayerBot.h \
  ../src/tests/../table_lib/TableTrain.h \
  ../src/tests/../table_lib/TableGUI.h \
  ../src/tests/../table_lib/../StdAfx.h \
  ../src/tests/../table_lib/../deck_lib/Hand.h \
  ../src/tests/../table_lib/../player_lib/PlayerRandom.h \
  ../src/tests/../table_lib/../player_lib/PlayerGUI.h \
- ../src/tests/../table_lib/AbstractTable.h \
+ ../src/tests/../table_lib/TableLogs.h \
  ../src/tests/../table_lib/../utils/utils.h \
  ../src/tests/../table_lib/GUI.h \
  ../src/tests/../table_lib/../player_lib/AbstractPlayer.h \
@@ -288,6 +291,8 @@ src/tests/test_table.o: ../src/tests/test_table.cpp \
 ../src/tests/../player_lib/../table_lib/../player_lib/PlayerRandom.h:
 
 ../src/tests/../player_lib/../table_lib/../player_lib/AbstractPlayer.h:
+
+../src/tests/../player_lib/../table_lib/../player_lib/PlayerLogs.h:
 
 ../src/tests/../player_lib/../table_lib/../utils/utils.h:
 
@@ -735,11 +740,15 @@ src/tests/test_table.o: ../src/tests/test_table.cpp \
 
 ../src/tests/../train_lib/../table_lib/AbstractTable.h:
 
+../src/tests/../train_lib/../table_lib/TableLogs.h:
+
 ../src/tests/../train_lib/../table_lib/Tracker.h:
 
 ../src/tests/../train_lib/../table_lib/State.h:
 
 ../src/tests/../train_lib/../table_lib/../StdAfx.h:
+
+../src/tests/../train_lib/../player_lib/PlayerBot.h:
 
 ../src/tests/../table_lib/TableTrain.h:
 
@@ -753,7 +762,7 @@ src/tests/test_table.o: ../src/tests/test_table.cpp \
 
 ../src/tests/../table_lib/../player_lib/PlayerGUI.h:
 
-../src/tests/../table_lib/AbstractTable.h:
+../src/tests/../table_lib/TableLogs.h:
 
 ../src/tests/../table_lib/../utils/utils.h:
 

@@ -13,9 +13,14 @@ src/train_lib/Session.o: ../src/train_lib/Session.cpp \
  ../src/train_lib/../table_lib/../player_lib/StatPlayer.h \
  ../src/train_lib/../table_lib/../player_lib/../utils/utils.h \
  ../src/train_lib/../table_lib/../player_lib/../utils/../StdAfx.h \
+ ../src/train_lib/../table_lib/../player_lib/PlayerLogs.h \
  ../src/train_lib/../table_lib/../utils/utils.h \
+ ../src/train_lib/../table_lib/TableLogs.h \
  ../src/train_lib/../table_lib/Tracker.h \
- ../src/train_lib/../table_lib/State.h
+ ../src/train_lib/../table_lib/State.h \
+ ../src/train_lib/../player_lib/PlayerBot.h \
+ ../src/train_lib/../player_lib/AbstractPlayer.h \
+ ../src/train_lib/../player_lib/PlayerLogs.h
 
 ../src/train_lib/Session.h:
 
@@ -47,8 +52,18 @@ src/train_lib/Session.o: ../src/train_lib/Session.cpp \
 
 ../src/train_lib/../table_lib/../player_lib/../utils/../StdAfx.h:
 
+../src/train_lib/../table_lib/../player_lib/PlayerLogs.h:
+
 ../src/train_lib/../table_lib/../utils/utils.h:
+
+../src/train_lib/../table_lib/TableLogs.h:
 
 ../src/train_lib/../table_lib/Tracker.h:
 
 ../src/train_lib/../table_lib/State.h:
+
+../src/train_lib/../player_lib/PlayerBot.h:
+
+../src/train_lib/../player_lib/AbstractPlayer.h:
+
+../src/train_lib/../player_lib/PlayerLogs.h:

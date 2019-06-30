@@ -1,4 +1,5 @@
-
+- Bug:
+	- when splitting pot, issue of integer
 
 - optim sur calcul de valeur de main
 		- table de hash

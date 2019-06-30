@@ -24,12 +24,11 @@ public:
 
 	void init_hand();
 
-	void distribute_preflop();
-	void distribute_card_to_board();
+	void distribute_street(Street street);
 
 	void play_hand();
 	bool run_full_pre_flop();
-	bool run_full_street(AbstractTable::Street street, bool action);
+	bool run_full_street(Street street, bool action);
 
 	void player_gets_pot(AbstractPlayer* player, unsigned int pot);
 	void distribute_pot_to_best_hands();
