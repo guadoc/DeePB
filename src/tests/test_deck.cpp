@@ -4,7 +4,7 @@
  *  Created on: Dec 8, 2018
  *      Author: Michael Blot
  */
-
+#include <unordered_map>
 
 #include "../StdAfx.h"
 
@@ -12,6 +12,9 @@
 #include "../deck_lib/Card.h"
 #include "../deck_lib/Deck.h"
 #include "../deck_lib/Hand.h"
+
+#include <chrono>
+#include <time.h>
 
 
 using namespace std;
@@ -261,15 +264,15 @@ public:
 						for (unsigned int i5 = i4 + 1; i5 < 52; i5++){
 							hand.push_back(Card(i5));
 							n_hand++;
-							hand.remove_end();
+							hand.pop_back();
 						}
-						hand.remove_end();
+						hand.pop_back();
 					}
-					hand.remove_end();
+					hand.pop_back();
 				}
-				hand.remove_end();
+				hand.pop_back();
 			}
-			hand.remove_end();
+			hand.pop_back();
 		}
 		cout<<"Total hands: "+ to_string(n_hand)<<endl;
 		return 0;
@@ -320,18 +323,59 @@ public:
 	}
 
 
+
+
 	int test_hash_function(){
 		Deck deck = Deck();
 		Hand hand = Hand();
-		hand.push_back(deck.random_card());
-		hand.push_back(deck.random_card());
-		hand.push_back(deck.random_card());
-		hand.push_back(deck.random_card());
-		hand.push_back(deck.random_card());
+//		hand.push_back(deck.random_card());
+//		hand.push_back(deck.random_card());
+//		hand.push_back(deck.random_card());
+//		hand.push_back(deck.random_card());
+//		hand.push_back(deck.random_card());
+
+
+
+		hand.push_back(Card(51));
+		hand.push_back(Card(50));
+		hand.push_back(Card(49));
+		hand.push_back(Card(48));
+		hand.push_back(Card(47));
 //		cout<<hand.to_str()<<endl;
 		cout<<"h code :"<<hand.h_function()<<endl;
 		cout<<hand.to_str()<<endl;
 
+		std::unordered_map<string, float> * valueMap = new std::unordered_map<string, float>;
+		hand.set_map(valueMap);
+
+		clock_t tStart = clock();
+
+//		valueMap.insert({hand.to_str(), hand.get_average_full_hand_value()});
+//		valueMap.insert({hand.to_str(), 13 });
+		cout<<"value "<<hand.get_value()<<endl;
+		clock_t tInter = clock();
+		cout<<"Time taken: "<< (double)(tInter - tStart)/CLOCKS_PER_SEC<<endl;
+		cout<<"value "<<hand.get_value()<<endl;
+		clock_t tEnd = clock();
+		cout<<"Time taken: "<< (double)(tEnd - tInter)/CLOCKS_PER_SEC<<endl;
+		cout<<"value "<<hand.get_value()<<endl;
+		clock_t tLast = clock();
+		cout<<"Time taken: "<< (double)(tLast - tEnd)/CLOCKS_PER_SEC<<endl;
+		// Iterate Over the unordered_map and display elements
+
+		hand.fill_map();
+
+//		for (auto element : valubot in"]<<endl;
+
+		/*
+		 * créer une fontion qui ouvre la map
+		 * la rentrer en attribue de Hand
+		 * remplir la map pour toutes les mains
+		 * enregistrer la map
+		 * faire des tests de performance.
+		 *
+		 * dans hand faire une fonction save map
+		 */
 		return 0;
 	}
 

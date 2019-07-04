@@ -5,17 +5,22 @@
 #include "Card.h"
 #include "Deck.h"
 
+#include <unordered_map>
+
 class Hand {
 public:
 	Hand();
 	Hand(const list<Card>&);
 	Hand(Deck &, unsigned int);
 	void set_cards(const list<Card> &);
+	void set_map(unordered_map<string, float> *);
 	void push_back(const Card & Ca);
 	void clear();
-	void remove_end();
+	void pop_back();
 	list<Card> get_cards() const;
+	unordered_map<string, float> * get_map();
 	void add_cards(list<Card>&);
+	void fill_map();
 
 	bool operator<(Hand &Ha);
 
@@ -28,9 +33,10 @@ public:
 
 	void scan();
 	unsigned int evaluate();
-	unsigned int get_average_full_hand_value();
+	float get_value();
+	float get_average_full_hand_value();
 	float monte_carlo_average_value(unsigned int n_total_cards, unsigned int);
-	unsigned int combinatorial_average_value(unsigned int n_total_cards);
+	float combinatorial_average_value(unsigned int n_total_cards);
 
 	unsigned int h_function();
 
@@ -62,10 +68,12 @@ protected:
 	vector<list<Card>> config;
 	list<Card> final_hand;
 
-	unsigned int evaluated_average_value;
+	float evaluated_average_value;
 	bool is_evaluated;
 	unsigned int n_cards_eval;
 	unsigned int n_monte_carlo_sampling;
+
+	std::unordered_map<string, float> * value_map;
 
 };
 

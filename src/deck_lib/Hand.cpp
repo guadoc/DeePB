@@ -38,7 +38,6 @@ list<Card> Hand::get_cards() const {
 }
 
 void Hand::clear() {
-
 	this->cards.clear();
 	this->is_evaluated = false;
 }
@@ -46,25 +45,25 @@ void Hand::clear() {
 void Hand::set_cards(const list<Card> &cards) {
 	this->cards = cards;
 	this->is_evaluated = false;
-//	this->init_config();
+}
+
+void Hand::set_map(std::unordered_map<string, float> * map){
+	this->value_map = map;
 }
 
 void Hand::push_back(const Card &card) {
 	this->cards.push_back(card);
 	this->is_evaluated = false;
-//	this->init_config();
 }
 
-void Hand::remove_end() {
-	return this->cards.pop_back();
+void Hand::pop_back() {
 	this->is_evaluated = false;
-//	this->init_config();
+	this->cards.pop_back();
 }
 
 void Hand::add_cards(list<Card> &cards) {
 	this->cards.insert(this->cards.end(), cards.begin(), cards.end());
 	this->is_evaluated = false;
-//	this->init_config();
 }
 
 bool Hand::operator <(Hand& Ha) {
@@ -91,12 +90,29 @@ string Hand::card_list_to_str(const list<Card> &card_list) {
 string Hand::to_str() const {
 	return this->card_list_to_str(this->cards);
 }
+
 list<Card> Hand::get_final_hand() const {
 	return this->final_hand;
 }
 
+float Hand::get_value(){
+	this->cards.sort();
+	string key = this->to_str();
 
-unsigned int Hand::get_average_full_hand_value() {
+	if(this->value_map->find(key) == this->value_map->end()){
+		float value = this->get_average_full_hand_value();
+		this->value_map->insert({key, value});
+		return value;
+	}
+	else{
+//		return (*this->value_map)[key];
+		return this->value_map->at(key);
+	}
+}
+
+
+
+float Hand::get_average_full_hand_value() {
 	if (!this->is_evaluated) {
 		if (this->cards.size() < this->n_cards_eval) {
 			this->evaluated_average_value =
@@ -136,7 +152,7 @@ unsigned int Hand::h_function(){
 	return h_code;
 }
 
-unsigned int Hand::combinatorial_average_value(unsigned int n_total_cards) {
+float Hand::combinatorial_average_value(unsigned int n_total_cards) {
 	float average_value = 0;
 	unsigned int n_hand = 0;
 	list<Card> card_list = this->cards;
@@ -154,12 +170,86 @@ unsigned int Hand::combinatorial_average_value(unsigned int n_total_cards) {
 			card_list.pop_back();
 		}
 	}
-//	cout<<n_hand<<endl;
 	return (unsigned int) average_value;
 }
 
-float Hand::monte_carlo_average_value(unsigned int n_total_cards,
-		unsigned int n_draws) {
+void progress_bar(float percentage){
+	unsigned int N_char_to_print = 100;
+	unsigned int n_done = (unsigned int) N_char_to_print * percentage;
+	unsigned int n_todo = (unsigned int) N_char_to_print * (1 -percentage);
+	string bar = "";
+	for (unsigned int i = 0; i<n_done; i++){
+		bar+="#";
+	}
+	for (unsigned int i = 0; i<n_todo; i++){
+		bar+=".";
+	}
+	cout<<bar<<endl;
+}
+
+void Hand::fill_map(){
+	this->cards.clear();
+	cout<<this->to_str()<<endl;
+	unsigned int n_hand = 0;
+
+	clock_t tStart = clock();
+	for (unsigned int i1 = 0; i1<52; i1++){
+		progress_bar((float)i1/(float)52);
+		this->cards.push_back(Card(i1));
+		for (unsigned int i2 = i1 + 1; i2 < 52; i2++){
+			this->cards.push_back(Card(i2));
+			for (unsigned int i3 = i2 + 1; i3 < 52; i3++){
+				this->cards.push_back(Card(i3));
+				for (unsigned int i4 = i3 + 1; i4 < 52; i4++){
+					this->cards.push_back(Card(i4));
+					for (unsigned int i5 = i4 + 1; i5 < 52; i5++){
+						this->cards.push_back(Card(i5));
+						n_hand++;
+//						cout<<this->to_str()<<endl;
+						this->get_value();
+//						cout<<this->to_str()<<endl;
+						this->cards.pop_back();
+					}
+					this->cards.pop_back();
+				}
+				this->cards.pop_back();
+			}
+			this->cards.pop_back();
+		}
+		this->cards.pop_back();
+	}
+	clock_t tStart = clock();
+	cout<<"Total hands: "+ to_string(n_hand)<<endl;
+	unsigned int count_hand = 0;
+	cout<<"Total hands: "<<this->value_map->size()<<endl;
+
+	this->cards.clear();
+	for (unsigned int i1 = 0; i1<52; i1++){
+		progress_bar((float)i1/(float)52);
+		this->cards.push_back(Card(i1));
+		for (unsigned int i2 = i1 + 1; i2 < 52; i2++){
+			this->cards.push_back(Card(i2));
+			for (unsigned int i3 = i2 + 1; i3 < 52; i3++){
+				this->cards.push_back(Card(i3));
+				for (unsigned int i4 = i3 + 1; i4 < 52; i4++){
+					this->cards.push_back(Card(i4));
+					for (unsigned int i5 = i4 + 1; i5 < 52; i5++){
+						this->cards.push_back(Card(i5));
+						n_hand++;
+						this->get_value();
+						this->cards.pop_back();
+					}
+					this->cards.pop_back();
+				}
+				this->cards.pop_back();
+			}
+			this->cards.pop_back();
+		}
+		this->cards.pop_back();
+	}
+}
+
+float Hand::monte_carlo_average_value(unsigned int n_total_cards, unsigned int n_draws) {
 	float average_value = 0;
 	unsigned int n_card_to_add = n_total_cards - this->cards.size();
 	list<Card> temp_card_list = this->cards;
