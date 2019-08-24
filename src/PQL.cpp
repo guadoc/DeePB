@@ -24,7 +24,7 @@ int main() {
 //	test_d.test_all_hands();
 //	test_d.test_MC_hand_value();
 //	test_d.test_two_cards_monte_carlo();
-	test_d.test_hash_function();
+//	test_d.test_hash_function();
 
 /******* TEST TABLE & GAME */
 	test_table test = test_table();
@@ -36,7 +36,7 @@ int main() {
 //	test.test_gui_player();
 //	test.test_random_player();
 //	test.test_train_table();
-//	test.test_torch();
+	test.test_torch();
 //	test.test_graphic_table();
 //	test.test_session();
 

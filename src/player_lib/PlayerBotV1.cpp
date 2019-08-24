@@ -5,6 +5,8 @@
 #include <iostream>
 #include <string>
 
+#include <random>
+
 #include "../deck_lib/Hand.h"
 
 PlayerBotV1::PlayerBotV1(void):ParentPlayerBotV1(){

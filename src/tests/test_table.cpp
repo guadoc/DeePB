@@ -41,14 +41,14 @@ public:
 
 		auto val = torch::sigmoid(tensor_param + tensor_input);
 		cout << val[0]<<endl;
-		val.backward(torch::nullopt, /*keep_graph=*/ true, /*create_graph=*/ false);
+//		val.backward(torch::nullopt, /*keep_graph=*/ true, /*create_graph=*/ false);
 		cout<<"Grad 1 "<<tensor_param.grad()<<endl;
 		optimizer.step();
 		cout<<"Grad 2 "<<tensor_param.grad()<<endl;
 //		tensor_param = tensor_param - tensor_param.grad();
 		cout<<"new param "<<tensor_param<<endl;
 		auto val2 = torch::sigmoid(tensor_param + tensor_input);
-		val2.backward(torch::nullopt, /*keep_graph=*/ true, /*create_graph=*/ false);
+//		val2.backward(torch::nullopt, /*keep_graph=*/ true, /*create_graph=*/ false);
 		cout<<"Grad 3 "<<tensor_param.grad()<<endl;
 		return 0;
 	}

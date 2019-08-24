@@ -218,9 +218,9 @@ void Hand::fill_map(){
 		}
 		this->cards.pop_back();
 	}
-	clock_t tStart = clock();
+	tStart = clock();
 	cout<<"Total hands: "+ to_string(n_hand)<<endl;
-	unsigned int count_hand = 0;
+	unsigned int count_hand = 0.0;
 	cout<<"Total hands: "<<this->value_map->size()<<endl;
 
 	this->cards.clear();
